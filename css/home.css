@@ -55,7 +55,7 @@ body {
 
 .section:nth-child(1) .nav img {
   width: 100px;
-  margin-right: 65%;
+  margin-right: 69%;
   position: relative;
   left: 2%;
 }
@@ -110,7 +110,7 @@ body {
     font-size: 30px;
   }
   .section:nth-child(1) .nav img {
-    margin-right: 60%;
+    margin-right: 64%;
   }
 }
 
@@ -126,6 +126,12 @@ body {
   }
 }
 
+@media screen and (max-width: 724px) {
+  .section:nth-child(1) .nav img {
+    margin-right: 61%;
+  }
+}
+
 @media screen and (max-width: 683px) {
   .section:nth-child(2) .head .head-text {
     left: 10%;
@@ -134,7 +140,13 @@ body {
     width: 50%;
   }
   .section:nth-child(1) .nav img {
-    margin-right: 55%;
+    margin-right: 57.5%;
+  }
+}
+
+@media screen and (max-width: 614px) {
+  .section:nth-child(1) .nav img {
+    margin-right: 55.5%;
   }
 }
 
@@ -164,7 +176,7 @@ body {
   .section:nth-child(1) .nav img {
     margin-right: 40%;
   }
-  .section:nth-child(4) button {
+  .section:nth-child(4) a {
     font-size: 8px;
   }
 }
@@ -175,7 +187,7 @@ body {
 }
 
 @media screen and (max-width: 308px) {
-  .section:nth-child(4) button {
+  .section:nth-child(4) a {
     width: 50%;
   }
 }
