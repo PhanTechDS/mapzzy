@@ -61,6 +61,7 @@ body {
 }
 
 .section:nth-child(1) .nav .nav-btn {
+  text-decoration: none;
   height: auto;
   display: flex;
   font-size: 14px;
@@ -95,7 +96,9 @@ body {
   width: 80%;
 }
 
-.section:nth-child(4) button {
+.section:nth-child(4) a {
+  text-decoration: none;
+  text-align: center;
   width: 20%;
   padding: 7px 12px;
   border: none;

@@ -24,6 +24,10 @@ body {
   color: #fff;
 }
 
+.u {
+  text-decoration: underline;
+}
+
 .green-btn {
   background-color: #0dd1a2;
   color: #fff;
