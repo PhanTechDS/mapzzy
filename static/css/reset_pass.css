@@ -1,0 +1,96 @@
+@import url("https://fonts.googleapis.com/css2?family=Alef:wght@400;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Alef", sans-serif;
+  /* font-size: 16px; */
+  line-height: 1.5;
+  background-color: #374349;
+}
+
+.container {
+  width: 90%;
+  display: grid;
+  align-items: center;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.input {
+  display: block;
+  width: 100%;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: 2px solid #73838a;
+  background: transparent;
+  padding: 12px 10px;
+  margin-top: 30px;
+  font-size: 18px;
+  font-family: "Alef", sans-serif;
+  letter-spacing: 0.04em;
+  color: #73838a;
+  margin-bottom: 10px;
+}
+
+.button {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  display: block;
+  width: 60%;
+  height: auto;
+  align-items: center;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 20px;
+  font-size: 20px;
+  margin-bottom: 30px;
+  background-color: #0dd1a2;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: 0.25s linear;
+}
+
+.button:hover,
+.button:active {
+  background-color: #fff;
+  color: #000;
+}
+
+.error,
+.success {
+  text-align: left;
+  color: red;
+  font-size: 1rem;
+  margin-top: 5px;
+  padding-left: 5px;
+  width: fit-content;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.error,
+.success {
+  text-align: center;
+  background-color: red;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 5px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.success {
+  background-color: #0dd1a2;
+}

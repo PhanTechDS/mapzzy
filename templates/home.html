@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home - MAPZZY</title>
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="/static/css/global.css" />
+    <link rel="stylesheet" href="/static/css/home.css" />
+
+    {% if logged_in %}
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""
+    ></script>
+    {% endif %}
+  </head>
+
+  <body>
+    <div class="section">
+      <div class="nav">
+        <img src="/static/images/logo_half.png" alt="logo" />
+        {% if not logged_in %}
+        <a href="/login" class="green-btn nav-btn">Login</a>
+        <a href="/register" class="nothing nav-btn">Sign Up</a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="section">
+      <div class="head">
+        <div class="head-text">
+          <p class="h1 white">Find your best stay.</p>
+          <p class="h4 white">
+            A <span class="green">Home</span> away from
+            <span class="green">your Home</span>.
+          </p>
+        </div>
+        {% if not logged_in %}
+        <img src="/static/images/home/loc.png" alt="Image" />
+        {% endif %} {% if logged_in %}
+        <div class="side">
+          <div class="qa-sec">
+            <div class="q active">
+              <input
+                type="text"
+                placeholder="Enter a location..."
+                class="loc-search"
+              />
+              <p class="sep">or</p>
+              <button class="get-curr-loc">Use your current location</button>
+            </div>
+            <!-- <div class="q sel-cat">
+              <label for="category">Select a category :- </label>
+              <select id="category">
+                <option value="10000">Arts and Entertainment</option>
+                <option value="11000">
+                  Business and Professional Services
+                </option>
+                <option value="12000">Community and Government</option>
+                <option value="13000">Dining and Drinking</option>
+                <option value="14000">Event</option>
+                <option value="15000">Health and Medicine</option>
+                <option value="16000">Landmarks and Outdoors</option>
+                <option value="17000">Retail</option>
+                <option value="18000">Sports and Recreation</option>
+                <option value="19000">Travel and Transportation</option>
+              </select>
+            </div> -->
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    <div class="section">
+      <p class="white desc">
+        We at <span class="bold u">MAPZZY</span> are fully committed towards our
+        goal to help our customers find the most ideal place to stay when they
+        shift to some new city. So are you going somewhere to pursue your dream
+        or are you going for a vacation? Come to us and we will be more than
+        happy to help you out !
+      </p>
+      <br />
+      {% if not logged_in %}
+      <p class="white space bold desc">
+        Press the button below to start your journey with us...
+      </p>
+    </div>
+    <div class="section">
+      <a href="/login" class="green-btn">CONTINUE</a>
+      {% endif %}
+    </div>
+    {% if logged_in %}
+    <div class="loader">
+      <div class="opacity"></div>
+      <div class="body">Loading...</div>
+    </div>
+    <div class="results">
+      <h2 class="title">Results</h2>
+      <div class="map"></div>
+      <button class="close-btn">Close</button>
+    </div>
+    <script src="/static/js/home.js"></script>
+    {% endif %}
+  </body>
+</html>
