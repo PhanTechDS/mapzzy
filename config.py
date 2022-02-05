@@ -1,1 +1,1 @@
-url = "http://localhost:5000/"
+url = "https://mapzzy.herokuapp.com/"
