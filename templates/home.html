@@ -21,6 +21,7 @@
       integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
       crossorigin=""
     ></script>
+    <script src="http://chancejs.com/chance.min.js"></script>
     {% endif %}
   </head>
 
@@ -57,23 +58,51 @@
               <p class="sep">or</p>
               <button class="get-curr-loc">Use your current location</button>
             </div>
-            <!-- <div class="q sel-cat">
-              <label for="category">Select a category :- </label>
+            <div class="q sel-dist">
+              <label for="category">Property Distance :- </label>
               <select id="category">
-                <option value="10000">Arts and Entertainment</option>
-                <option value="11000">
-                  Business and Professional Services
-                </option>
-                <option value="12000">Community and Government</option>
-                <option value="13000">Dining and Drinking</option>
-                <option value="14000">Event</option>
-                <option value="15000">Health and Medicine</option>
-                <option value="16000">Landmarks and Outdoors</option>
-                <option value="17000">Retail</option>
-                <option value="18000">Sports and Recreation</option>
-                <option value="19000">Travel and Transportation</option>
+                <option value="100000">Default</option>
+                <option value="10000">Nearby</option>
               </select>
-            </div> -->
+              <div class="option">
+                <button class="prev">Go Back</button>
+                <button class="next">Next</button>
+              </div>
+            </div>
+            <div class="q sel-price">
+              <label for="category">Property Price :- </label>
+              <select id="category">
+                <option value="0">Default</option>
+                <option value="10000">Cheap</option>
+              </select>
+              <div class="option">
+                <button class="prev">Go Back</button>
+                <button class="next">Next</button>
+              </div>
+            </div>
+            <div class="q sel-sort">
+              <label for="category">Sort Property :- </label>
+              <select id="category">
+                <option value="relevance">Relevance</option>
+                <option value="rating">Rating</option>
+                <option value="distance">Distance</option>
+              </select>
+              <div class="option">
+                <button class="prev">Go Back</button>
+                <button class="next">Next</button>
+              </div>
+            </div>
+            <div class="q sel-family">
+              <label for="category">For :- </label>
+              <select id="category">
+                <option value="0">Family</option>
+                <option value="1">Bachelor</option>
+              </select>
+              <div class="option">
+                <button class="prev">Go Back</button>
+                <button class="submit">Submit</button>
+              </div>
+            </div>
           </div>
         </div>
         {% endif %}
