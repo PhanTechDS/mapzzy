@@ -50,7 +50,7 @@
           response.results.forEach((e, i) => {
             let mul = 0.05;
             if (final["dist"] == "10000") {
-              mul = 0.025;
+              mul = 0.005;
             }
             let r = [chance.random() * 0.05, chance.random() * 0.05];
             markers.push(
@@ -65,6 +65,10 @@
               price = price * 10000;
             } else {
               price = price * 5000;
+            }
+
+            if (price < 4000) {
+              price = 4000;
             }
             markers[i].bindPopup(
               chance.name().split(" ")[0] + "'s Rent<br>₹" + Math.round(price)
@@ -89,6 +93,7 @@
 
   let current = 0;
   let all = document.querySelectorAll(".qa-sec .q");
+  const steps = document.querySelectorAll(".qa-sec .steps .step");
 
   all[1].querySelector("select").addEventListener("change", function () {
     final["dist"] = all[1].querySelector("select").value;
@@ -126,17 +131,38 @@
       });
     }
   });
+  const parent = document.querySelector(".qa-sec");
   function next() {
-    all[current].classList.remove("active");
-    all[current + 1].classList.add("active");
+    all[current].classList.value = "q";
+    all[current + 1].classList.value = "q active";
+    all[current].classList.add("exit");
+    all[current + 1].classList.add("enter");
+    parent.style.height = all[current + 1].offsetHeight + 44 + "px";
     current = current + 1;
+    steps[current - 1].classList.add("done");
+    steps[current - 1].classList.remove("active");
+    steps[current - 1].disabled = false;
+    steps[current].classList.add("active");
   }
 
   function prev() {
-    all[current].classList.remove("active");
-    all[current - 1].classList.add("active");
+    all[current].classList.value = "q";
+    all[current - 1].classList.value = "q active";
+    all[current].classList.add("exitp");
+    all[current - 1].classList.add("enterp");
+    parent.style.height = all[current - 1].offsetHeight + 44 + "px";
     current = current - 1;
+    steps[current].classList.add("active");
   }
+  steps.forEach((e, i) => {
+    e.addEventListener("click", function () {
+      if (e.classList.contains("done") && current !== i) {
+        all[i].classList.value = "q active enterp";
+        all[current].classList.value = "q exitp";
+        current = i;
+      }
+    });
+  });
 
   const searchInput = document.querySelector(".qa-sec .q input.loc-search");
   const getLocBtn = document.querySelector(".qa-sec .q button.get-curr-loc");
@@ -155,10 +181,17 @@
         .then((data) => {
           const res = data.results;
           if (res.length > 0) {
-            searchInput.value = res[0].address_line2;
-            lat_long = res[0].lat + "," + res[0].lon;
-            searchInput.disabled = false;
-            next();
+            if (res[0].country_code === "in") {
+              searchInput.value = res[0].address_line1;
+              lat_long = res[0].lat + "," + res[0].lon;
+              searchInput.disabled = false;
+              next();
+            } else {
+              alert("Please enter a location in India");
+              searchInput.disabled = false;
+            }
+          } else {
+            alert("Please enter a valid location");
           }
         });
     }
