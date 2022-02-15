@@ -311,7 +311,7 @@ body {
 
 .qa-sec .steps {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(7, 1fr);
   margin-top: 5px;
   margin-bottom: 10px;
   align-items: center;
@@ -339,7 +339,7 @@ body {
 .qa-sec .steps .step.active,
 .qa-sec .steps .step.done {
   background-color: #0dd1a2;
-  color: #fff;
+  color: #0dd1a2;
   cursor: default;
 }
 

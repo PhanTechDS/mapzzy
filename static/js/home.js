@@ -15,7 +15,9 @@
     gym: "0",
     cooking: "0",
     sports: "1",
-    for: "0",
+    eat_outside: "0",
+    gender: "0",
+    marital_status: "0",
   };
   OpenStreetMap_Mapnik.addTo(map);
   function showResults() {
@@ -96,11 +98,18 @@
   });
 
   all[4].querySelector("select").addEventListener("change", function () {
-    final["for"] = all[4].querySelector("select").value;
-    console.log(final);
+    final["eat_outside"] = all[4].querySelector("select").value;
   });
 
-  all[4]
+  all[5].querySelector("select").addEventListener("change", function () {
+    final["gender"] = all[5].querySelector("select").value;
+  });
+
+  all[4].querySelector("select").addEventListener("change", function () {
+    final["marital_status"] = all[6].querySelector("select").value;
+  });
+
+  all[6]
     .querySelector(".option button.submit")
     .addEventListener("click", function () {
       showResults();

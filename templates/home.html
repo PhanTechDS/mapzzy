@@ -40,8 +40,8 @@
         <div class="head-text">
           <p class="h1 white">Find your best stay.</p>
           <p class="h4 white">
-            Ghar se <span class="green">duuuur...</span>
-            Ghar wali <span class="green">feeling</span>.
+            Ghar se <span class="green">duuuur...</span> Ghar wali
+            <span class="green">feeling</span>.
           </p>
         </div>
         {% if not logged_in %}
@@ -51,6 +51,8 @@
           <div class="qa-sec">
             <div class="steps">
               <button class="step active">x</button>
+              <button class="step" disabled>x</button>
+              <button class="step" disabled>x</button>
               <button class="step" disabled>x</button>
               <button class="step" disabled>x</button>
               <button class="step" disabled>x</button>
@@ -99,10 +101,33 @@
               </div>
             </div>
             <div class="q sel-family">
-              <label for="category">For :- </label>
+              <label for="category">Do you like eating outside?</label>
               <select id="category">
-                <option value="0">Family</option>
-                <option value="1">Bachelor</option>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+                <option value="2">Sometimes</option>
+              </select>
+              <div class="option">
+                <button class="prev">Go Back</button>
+                <button class="next">Next</button>
+              </div>
+            </div>
+            <div class="q sel-family">
+              <label for="category">Are you?</label>
+              <select id="category">
+                <option value="0">Male</option>
+                <option value="1">Female</option>
+              </select>
+              <div class="option">
+                <button class="prev">Go Back</button>
+                <button class="next">Next</button>
+              </div>
+            </div>
+            <div class="q sel-family">
+              <label for="category">What's your marital status?</label>
+              <select id="category">
+                <option value="0">Single</option>
+                <option value="1">Married</option>
               </select>
               <div class="option">
                 <button class="prev">Go Back</button>
