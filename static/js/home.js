@@ -12,9 +12,9 @@
     }
   );
   const final = {
-    dist: "100000",
-    price: "0",
-    sort: "relevance",
+    gym: "0",
+    cooking: "0",
+    sports: "1",
     for: "0",
   };
   OpenStreetMap_Mapnik.addTo(map);
@@ -34,10 +34,7 @@
     fetch(
       "https://api.foursquare.com/v3/places/search?query=rent&ll=" +
         lat_long +
-        "&radius=" +
-        final["dist"] +
-        "&sort=" +
-        final["sort"],
+        "&sort=popularity",
       options
     )
       .then((response) => response.json())
@@ -48,10 +45,6 @@
         let markers = [];
         if (response.results.length > 0) {
           response.results.forEach((e, i) => {
-            let mul = 0.05;
-            if (final["dist"] == "10000") {
-              mul = 0.005;
-            }
             let r = [chance.random() * 0.05, chance.random() * 0.05];
             markers.push(
               L.marker([
@@ -60,12 +53,7 @@
               ])
             );
             markers[i].addTo(map);
-            let price = chance.random();
-            if (final["price"] === "0") {
-              price = price * 10000;
-            } else {
-              price = price * 5000;
-            }
+            let price = chance.random() * 10000;
 
             if (price < 4000) {
               price = 4000;
@@ -96,15 +84,15 @@
   const steps = document.querySelectorAll(".qa-sec .steps .step");
 
   all[1].querySelector("select").addEventListener("change", function () {
-    final["dist"] = all[1].querySelector("select").value;
+    final["gym"] = all[1].querySelector("select").value;
   });
 
   all[2].querySelector("select").addEventListener("change", function () {
-    final["price"] = all[2].querySelector("select").value;
+    final["cooking"] = all[2].querySelector("select").value;
   });
 
   all[3].querySelector("select").addEventListener("change", function () {
-    final["sort"] = all[3].querySelector("select").value;
+    final["sports"] = all[3].querySelector("select").value;
   });
 
   all[4].querySelector("select").addEventListener("change", function () {
