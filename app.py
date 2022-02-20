@@ -64,9 +64,12 @@ def register():
         if password != cpassword:
             return render_template("register.html",email=em,phone=ph,name=name,error="Passwords do not match")
 
-        user = User(em,password,name,ph)
-        dbsession.add(user)
-        dbsession.commit()
+        try:
+            user = User(em,password,name,ph)
+            dbsession.add(user)
+            dbsession.commit()
+        except Exception as e:
+            return render_template("register.html",email=em,phone=ph,name=name,error="Email already exists!")
 
         return render_template("register.html",success="Registration Successful!")
 
