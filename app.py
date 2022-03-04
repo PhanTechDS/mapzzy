@@ -15,6 +15,10 @@ app = Flask(__name__)
 
 Base.metadata.create_all(db)
 
+@app.route("/")
+def index():
+    return redirect("https://www.google.com",code=302)
+
 @app.route('/api/login',methods=["GET","POST"])
 def login():
     if request.method == "POST":
