@@ -1,0 +1,133 @@
+.slider {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 95vw;
+  min-width: 400px;
+}
+
+.slider .slide {
+  position: absolute;
+  opacity: 0;
+  min-width: 400px;
+  pointer-events: none;
+}
+
+.slider .slides {
+  position: relative;
+  transition: 0.25s linear;
+  margin-bottom: 10px;
+}
+
+.slider .options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.slider .options .next,
+.slider .options .prev {
+  width: fit-content;
+}
+
+.slider .options .next {
+  display: flex;
+  justify-self: flex-end;
+}
+
+.slider .slide.active {
+  position: relative;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.slider .slide.nextSlide {
+  position: absolute;
+  right: -100%;
+  opacity: 0;
+  animation: comeFromRight 0.5s linear;
+  right: 0;
+  opacity: 1;
+}
+
+.slider .slide.prevSlide {
+  position: absolute;
+  left: 0;
+  opacity: 1;
+  animation: goLeft 0.5s linear;
+  opacity: 0;
+  left: -100%;
+}
+
+.slider .slide.nextSlideP {
+  position: absolute;
+  left: -100%;
+  opacity: 0;
+  animation: comeFromLeft 0.5s linear;
+  left: 0;
+  opacity: 1;
+}
+
+.slider .slide.prevSlideP {
+  position: absolute;
+  left: 0;
+  opacity: 1;
+  animation: goRight 0.5s linear;
+  opacity: 0;
+  left: 100%;
+}
+
+@keyframes goLeft {
+  from {
+    opacity: 1;
+    left: 0;
+  }
+  to {
+    opacity: 0;
+    left: -100%;
+  }
+}
+
+@keyframes goRight {
+  from {
+    opacity: 1;
+    left: 0;
+  }
+  to {
+    opacity: 0;
+    left: 100%;
+  }
+}
+
+@keyframes comeFromRight {
+  from {
+    opacity: 0;
+    right: -100%;
+  }
+  to {
+    opacity: 1;
+    right: 0%;
+  }
+}
+
+@keyframes comeFromLeft {
+  from {
+    opacity: 0;
+    left: -100%;
+  }
+  to {
+    opacity: 1;
+    left: 0%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .slider {
+    min-width: 300px;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .slider {
+    min-width: 200px;
+  }
+}

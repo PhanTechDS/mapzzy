@@ -1,0 +1,17 @@
+.loading {
+  z-index: 9999;
+}
+
+.content {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+.content .loader {
+  margin-bottom: 10px;
+}
+
+.loading {
+  cursor: progress;
+}
