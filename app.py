@@ -1,6 +1,4 @@
-from ast import Pass
-from flask import Flask, render_template, redirect, session, request, abort
-from flask_session import Session
+from flask import Flask, render_template, redirect, request, abort
 from models import db, Base, dbsession
 from models.user import User
 from models.pass_reset import PassReset
@@ -10,27 +8,18 @@ from utils import email, phone
 from uuid import uuid4
 from utils.mailer import send_mail
 from config import url
+from utils import msg, session
 
 app = Flask(__name__)
 
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
-
-Session(app)
 
 Base.metadata.create_all(db)
 
-@app.route('/')
-def home():
-    email = session.get("email")
-    logged_in = email!=None
-    return render_template('home.html',logged_in=logged_in)
-
-@app.route('/login',methods=["GET","POST"])
+@app.route('/api/login',methods=["GET","POST"])
 def login():
     if request.method == "POST":
-        email = request.form.get("email")
-        password = request.form.get("password")
+        email = request.json.get("email")
+        password = request.json.get("password")
         password = sha256(bytes(password,encoding="utf-8")).hexdigest()
         user = select(User).where(User.email == email)
         res = dbsession.execute(user).fetchone()
@@ -38,47 +27,56 @@ def login():
             res = res[0]
             real_pass = res.password
             if real_pass == password:
-                session["email"] = email
-                return redirect("/")
+                return msg.success({
+                    "token": session.generate({"email": email})
+                })
             else:
-                return render_template("login.html",email=email,error="Please recheck your password!")
+                return msg.error("Wrong password")
         else:
-            return render_template("login.html",email=email,em_error="Email not found!")
-    else:
-        return render_template('login.html')
+            return msg.error("Email not found!")
 
-@app.route("/register",methods=["GET","POST"])
+@app.route("/api/register",methods=["GET","POST"])
 def register():
     if request.method == "POST":
-        em = request.form.get("email")
-        ph = request.form.get("phone")
-        name = request.form.get("name")
-        password = request.form.get("password")
-        cpassword = request.form.get("cpassword")
+        em = request.json.get("email")
+        ph = request.json.get("phone")
+        name = request.json.get("name")
+        password = request.json.get("password")
+        cpassword = request.json.get("cpassword")
         if not phone.match(ph):
-            return render_template("register.html",email=em,phone=ph,name=name,error="Invalid Phone Number")
+            return msg.error("Invalid Phone Number")
 
         if not email.match(em):
-            return render_template("register.html",email=em,phone=ph,name=name,error="Invalid Email")
+            return msg.error("Invalid Email")
 
         if password != cpassword:
-            return render_template("register.html",email=em,phone=ph,name=name,error="Passwords do not match")
+            return msg.error("Passwords do not match")
 
         try:
             user = User(em,password,name,ph)
             dbsession.add(user)
             dbsession.commit()
         except Exception as e:
-            return render_template("register.html",email=em,phone=ph,name=name,error="Email already exists!")
+            return msg.error("Email already exists!")
 
-        return render_template("register.html",success="Registration Successful!")
+        return msg.success("Registration Successful!")
 
     return render_template("register.html")
 
-@app.route("/forget_password",methods=["GET","POST"])
+@app.route("/api/verify",methods=["GET","POST"])
+def Verify():
+    if request.method == "POST":
+        token = request.json.get("token")
+        data = session.verify(token)
+        if data:
+            return msg.success(data)
+        else:
+            return msg.error("Invalid Token")
+
+@app.route("/api/forget_password",methods=["GET","POST"])
 def forget_password():
     if request.method == "POST":
-        email = request.form.get("email")
+        email = request.json.get("email")
         user = select(User).where(User.email == email)
         res = dbsession.execute(user).fetchone()
         if res:
@@ -93,9 +91,9 @@ def forget_password():
                 send_mail(email,"Password Reset","Click on the link to reset your password: "+url+"reset/"+token)
                 dbsession.add(pass_reset)
             dbsession.commit()
-            return render_template("forget_password.html",success="Password reset link sent to your email")
+            return msg.success("Password reset link sent to your email")
         else:
-            return render_template("forget_password.html",error="Email not found!")
+            return msg.error("Email not found!")
     else:
         return render_template("forget_password.html")
 
@@ -118,6 +116,15 @@ def reset_pass(token):
         return render_template("reset.html")
     else:
         abort(404)
+
+@app.after_request
+def add_header(r):
+    header = r.headers
+    header["Access-Control-Allow-Origin"] = "*"
+    header["Access-Control-Allow-Headers"] = "*"
+    header["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE"
+    return r
+
 
 if __name__ == '__main__':
     app.run(debug=True)
