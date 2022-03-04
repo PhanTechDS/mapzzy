@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import { appName } from "../globals";
 import styles from "../styles/Login.module.css";
 import {
@@ -23,13 +24,12 @@ export default function Login() {
   const [success, setSuccess] = useState(null);
   const sendRequest = useHit();
   const auth = useAuth();
-  const [isVisible,setVisible] = useState(false);
+  const [isVisible, setVisible] = useState(false);
 
   useEffect(() => {
     if (auth.isLoggedIn()) {
       window.location.href = "/";
-    }
-    else{
+    } else {
       setVisible(true);
     }
   }, [auth]);
@@ -89,7 +89,9 @@ export default function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                     className={styles.pass}
                   />
-                  <a href="/forget_password">Forgot Password?</a>
+                  <Link href="/forget_password">
+                    <a>Forgot Password?</a>
+                  </Link>
                 </div>
 
                 <Button
