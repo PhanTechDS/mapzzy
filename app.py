@@ -17,7 +17,7 @@ Base.metadata.create_all(db)
 
 @app.route("/")
 def index():
-    return redirect("https://www.google.com",code=302)
+    return redirect("https://mapzzy.vercel.app/",code=302)
 
 @app.route('/api/login',methods=["GET","POST"])
 def login():
