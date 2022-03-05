@@ -122,12 +122,6 @@
 
 @media screen and (max-width: 400px) {
   .slider {
-    min-width: 300px;
-  }
-}
-
-@media screen and (max-width: 300px) {
-  .slider {
-    min-width: 200px;
+    min-width: 95vw;
   }
 }

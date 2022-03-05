@@ -175,6 +175,17 @@
   box-shadow: inset 0 0 5px 0 #afafaf;
 }
 
+.questionsWave {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height: 100px;
+  background-image: url("/assets/questions_wave.svg");
+  background-size: cover;
+  background-position: 50% 0%;
+  background-repeat: no-repeat;
+}
+
 @keyframes wave {
   from {
     margin-left: 0;

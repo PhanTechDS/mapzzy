@@ -303,6 +303,7 @@ export default function Home() {
       </div>
       {!hideBlob && <div className={styles.blob}></div>}
       <Modal open={showModal} onClose={() => setShowModal(false)}>
+        <div className={styles.questionsWave}></div>
         <Slider
           items={questions.map((e, i) => {
             return (
